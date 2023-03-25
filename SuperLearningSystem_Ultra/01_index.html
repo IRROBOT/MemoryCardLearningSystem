@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<!--------------------------------------------------------------------------
+Version------------------VSM2-----------------------------------
+Date-----------------------Dec.16.2021--------------------------------------
+Modify Records-------------Dec.18.2021（Added a update button）-------------
+-----------------------Dec.29.2021(Fixed a function of memorize method)-----
+-----------Dec.31.2021(Fixed no association element li glowing problem)-----
+Author-----------------------Shawn(Xiao Li)---------------------------------
+------------------------All Rights Reserved--------------------------------->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link href="img/SLS.ico" rel="shortcut icon" >
+<title>SLS-Ultra</title>
+	<style>
+	#glow_tip{
+		height:50px;
+		width:50px;
+		color:red;
+		float:right;
+		position:fixed;
+		right:42px;
+		background-color:white;
+		border:none;
+		border-radius:50%;
+		line-height:50px;
+		font-size:18px;
+		text-align:center;
+	}
+	#Retest{
+			padding:5px;
+			font-size:80%;
+			position:fixed;
+			color:white;
+			line-height:20px;
+			fon-weight:bold;
+			font-family:楷体;
+			background-color:#6E7B6C;
+			border-radius:6px;
+			border: none;
+			top:300px;
+			left:3%;
+		}
+		#Go_bottom{
+			padding:5px;
+			font-size:80%;
+			position:fixed;
+			color:white;
+			line-height:20px;
+			font-weight:bold;
+			font-family:楷体;
+			background-color:#6E7B6C;
+			border-radius:6px;
+			border:none;
+			top:400px;
+			right:3%;
+		}
+		#Go_top{
+			padding:5px;
+			font-size:80%;
+			position:fixed;
+			color:white;
+			display:block;
+			line-height:20px;
+			font-weight:bold;
+			font-family:楷体;
+			background-color:#6E7B6C;
+			border-radius:6px;
+			border:none;
+			top:365px;
+			right:3%;
+		}
+		body{
+			background-size:cover;
+			-webkit-background-size: cover;
+			-o-background-size: cover;
+			-moz-background-size: cover;
+			-ms-background-size: cover;
+		}
+		#box{
+			width:848px;
+			margin:0 auto;
+		}
+		#box ul li{
+			font-size:22px;
+			width:800px;
+			height:24px;
+			color:gold;
+			tex-overflow:ellipsis;
+			white-space: nowrap;
+			overflow:hidden;
+			position:relative;
+			-moz-box-shadow:1px 2px 4px rgba(0,0,0,0.5);
+			-webkit-box-shadow:1px 2px 4px rgba(0,0,0,.5);
+			box-shadow:15px 10px 10px rgba(0,0,0,.5);
+			padding:5px;
+			background:white;
+		}
+		#box ul li span{
+			color:seagreen;
+		}
+		#box > ul > div{
+			width:270px;
+			float:right;
+			position:relative;
+			z-index:10;
+			top:31px;
+		}
+		#box  ul  div button:first-of-type{//这是删除按钮
+			float:right;
+			background-color: #f44336;
+			color:white;
+			position:relative;
+			font-size:22px;
+			margin-left:10px;
+			border: none;
+			border-radius:6px;
+			display:inline-block;
+			opacity:1;
+			box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+		}
+		#box  ul  div button:last-of-type{//这是修改按钮
+			float:right;
+			background-color:blueviolet;
+			color:white;
+			z-index:90;
+			margin-left:10px;
+			position:relative;
+			font-size:22px;
+			border: none;
+			border-radius:6px;
+			display:inline-block;
+			opacity:1;
+			box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+		}
+		#box > ul > div input:first-of-type{//测试按钮
+			float:right;
+			background-color:skyblue;
+			color:white;
+			position:relative;
+			overflow:hidden;
+			z-index:90;
+			font-size:22px;
+			border: none;
+			border-radius:6px;
+			display: inline-block;
+			opacity:1;
+			box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+		}
+		#box > ul > div input:last-of-type{//记忆按钮
+			float:right;
+			margin-left:10px;
+			background-color:#6E7B6C;
+			color:white;
+			position:relative;
+			overflow:hidden;
+			z-index:90;
+			font-size:22px;
+			border: none;
+			border-radius:6px;
+			display: inline-block;
+			opacity:1;
+			box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+		}
+		#title_list{
+			text-align:center;
+			font-size:32px;
+			font-weight:bold;
+		}
+		#contain_btn{
+			width:350px;
+			margin:0 auto;
+		}
+		#Create_btn{
+			margin-right:30px;
+			background-color:orange;
+			font-size:23px;
+			border: none;
+			color:white;
+			border-radius:6px;
+			box-shadow: 5px 8px 4px 2px rgba(210,105,30,0.19), 0 6px 20px 0 rgba(0,0,0,0.19);
+		}
+		#Random_btn{
+			color:white;
+			background-color:orange;
+			font-size:23px;
+			border-radius:6px;
+			border: none;
+			box-shadow: 5px 8px 4px 2px rgba(210,105,30,0.19), 0 6px 20px 0 rgba(0,0,0,0.19);
+		}
+		#self_test{
+			display:none;
+			margin-top:100px;
+			width:760px;
+			margin:0 auto;
+			padding-top:7%;
+		}
+		#self_test textarea{
+			margin-left:5%;
+		}
+		#self_test input,#alterFrameTable input{
+			width:160px;
+			border:solid #e2fff8 1px;
+		}
+		#self_submit{
+			display:none;
+			width:140px;
+			margin:0 auto;
+		}
+		#self_sub{
+			font-weight:bold;
+			color:brown;
+			background-color:yellowgreen;
+			border-radius:6px;
+			border: none;
+			font-size:26px;
+			margin-top:30px;
+		}
+		#your_score{
+			display:none;
+		}
+		#ay_an{
+			display:none;
+		}
+		#close_button{
+			margin-top:20px;
+			margin-right:42%;
+			width:120px;
+			display:none;
+			float:right;
+		}
+		#close_btn{
+			color:white;
+			background-color:skyblue;
+			font-size:26px;
+			border-radius:6px;
+			border:none;
+		}
+.changeContent{
+	display:none;
+}
+	</style>
+	
+	<script src="jquery-3.3.1.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="skin/layer.css" />
+	<script src="layer.js"></script>
+	<script src="diff.js"></script>
+	
+	
+</head>
+<body>
+	
+	<p id="time_sologan" style="color:gold;background-color:#FF5511;font-size:23px;opacity:0.9;text-align:center">wait</p><button id="slogan_btn" style="float:right;position:relative;top:-45px;border:none;box-shadow: 0 3px 10px 0 rgba(0,0,0,0.2), 0 3px 10px 0 rgba(0,0,0,0.19);background-image: linear-gradient(to bottom, gold,#FF5511,gold);color: #fafafa;">修改标语</button>
+	<p style="background-color:rgba(233, 235, 254,0.6);color:gold;font-size:18px;width:72px;height:18px;float:left;position:relative;left: 18px; top: -36px;">性能模式</p>
+	<div style="height:30px;width:104px;background-color:white;padding-bottom:0.8px;padding-top:0.7px;"><div id="btn_toggle" style="height:30px;width:50px;background-color:dimGray;border-color:lime;border-radius:3px;line-height:28px;float:left;position:relative;top:-53px;color:white;text-align:center">OFF</div></div>
+	<!--
+	<div class="left_side"  style=" width:320px; height:600px;background:#C7EDCC;position:absolute;left:-320px;">
+		<p style="text-align:center;font-family:楷体;font-size:21px;">待复习列表</p>
+		<ul style="overflow-y:scroll;">
+		</ul>
+		<span style="width:20px;height:70px;color:#2B6FD5;line-height:23px;background:#DCE2F1;position:absolute;right:-20px;top:270px;border-top-right-radius:10px;border-bottom-right-radius:10px;font-family:楷体;font-size:21px;">复►习</span>
+	</div>
+	
+	<div class="right_side"  style=" width:300px; height:600px;background:#C7EDCC;position:absolute;right:-300px;">
+		<p style="text-align:center;font-family:楷体;font-size:21px;">待记忆列表</p>
+		<ul style="overflow-y:scroll;">
+		</ul>
+		<span style="width:20px;height:115px;color:#2B6FD5;line-height:23px;background:#DCE2F1;position:absolute;left:-20px;top:270px;border-top-left-radius:10px;border-bottom-left-radius:10px;font-family:楷体;font-size:21px;">记忆◄列表</span>
+	</div>
+	-->
+	<button id="Go_bottom" > ⮟ </button><div id="glow_tip"></div>
+	<button id="Go_top" > ⮝ </button>
+	<button id="Retest">页面刷新🔃</button>
+	<div id="box">
+		<p id="title_list" style="color:gold;text-align:center">📋知识点列表📋</p>
+		<p id="tip" style="color:white;text-align:center;font-size:20px"></p>
+		<ul></ul>
+		<div id="contain_btn">
+			<button id="Create_btn">✍创建知识</button>
+			<button id="Random_btn">📝随机测试</button>
+		</div>
+		<div id="alterFrame" style="display:none;margin:0 auto;width:704px;padding-top:30px;"><!--修改框-->
+			<textarea name="text_str" style="min-height: 400px;min-width: 700px;max-height: 400px; max-width: 700px;font-size:22px;"></textarea>
+		</div>
+		<div id="alterFrameTable" style="display:none;padding-top:30px;margin:0 auto;">
+		</div>
+		<div id="alter_key" style="display:none">
+			<button id="alter_btn" style="margin-left:40%;margin-top:30px;font-weight:bold;color:brown;background-color:yellowgreen;border-radius:6px;border:none;font-size:26px;">💾确定修改💾</button>
+			<button id="roll_ans_btn" style="margin-left:40%;margin-top:30px;font-weight:bold;color:brown;background-color:yellowgreen;border-radius:6px;border:none;font-size:26px;">📇收起答案📇</button>
+		</div>
+		<div id="self_test">
+		</div>
+		<div id="self_submit">
+			<button id="self_sub">📤提交📤</button>
+		</div>
+		<div id="your_score">
+			<p id="pp" style="text-align:center;font-size:28px;background-color:rgba(184,184,184,0.6);color:orange;"></p>
+			<p id="line_t" style="text-align:center;background-color:orange;color:darkred;display:none;">分析</p>
+		</div>
+		
+		<div id="ay_an">
+			<div class="changeContent">
+				<div id="res" style="display:none;width:700px;height:400px;background-color:grey;margin:0 auto;font-size:23px;margin-top:80px;opacity:0.9;padding:5px;color:white"></div>
+			</div>
+		</div>
+		<div id="close_button">
+			<button id="validity_btn" style="display:none">回忆正确</button>
+			<button id="hesitate_btn" style="display:none">回忆犹豫</button>
+			<button id="hard_btn" style="display:none">回忆困难</button>
+			<button id="wrong_btn" style="display:none">回忆错误</button>
+			<button id="TrueClose_btn">关闭</button>
+		</div>
+	</div>
+	<script src="sls.js" type="text/javascript"></script>
+</body>
+</html>

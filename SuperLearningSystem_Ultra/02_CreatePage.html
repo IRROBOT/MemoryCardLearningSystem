@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<!--
+Author-----------------------Shawn(Xiao Li)---------------------------------
+------------------------All Rights Reserved--------------------------------->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<title>SLS-创建</title>
+	<style>
+	body{
+			background-size:cover;
+			-webkit-background-size: cover;
+			-o-background-size: cover;
+			-moz-background-size: cover;
+			-ms-background-size: cover;
+		}
+		#box2{
+			width:1430px;
+			height:800px;
+			margin:0 auto;
+		}
+		#return_index{
+			font-size:28px;
+			fon-weight:bold;
+			color:white;
+			fon-weight:bold;
+			font-family:华文彩云;
+			background-color:skyblue;
+			border-radius:6px;
+			border: none;
+			margin-left:45%;
+		}
+		#contain_btn{
+			width:125px;
+			margin:0 auto;
+			font-size:20px;
+			color:white;
+		}
+		#pp{
+			font-size:30px;
+			font-weight:bold;
+			text-align:center;
+		}
+		#table_row{
+			display:none;
+			margin:0 auto;
+			width:504px;
+			color:white;
+		}
+		#t1,#t2{
+			width:60px;
+		}
+		#t3{
+			margin-left:25px;
+			width:500px;
+			margin:0 auto;
+		}
+		#t4{
+			margin-bottom:25px;
+			height:20px;
+			width:600px;
+			font-size:20px;
+		}
+		#row_btn{
+			margin-top:30px;
+			margin-left:210px;
+			background-color:yellowgreen;
+			color:brown;
+			border-radius:6px;
+			border: none;
+			font-size:26px;
+		}
+		#table_list{
+			display:none;
+			margin:0 auto;
+			
+		}
+		#table_list input{
+			width:160px;
+			margin:0 auto;
+		}
+		#confirm_btn {
+			display:none;
+			width:80px;
+			font-size:26px;
+			font-weight:bold;
+			margin:0 auto;
+		}
+		#create_btn{
+			font-weight:bold;
+			color:brown;
+			background-color:yellowgreen;
+			border-radius:6px;
+			border: none;
+			font-size:26px;
+			margin-top:20px;
+		}
+		#string_box{
+			display:none;
+			width:604px;
+			margin:0 auto;
+		}
+		#string_box textarea{
+			
+		}
+	</style>
+	<script src="jquery-3.3.1.min.js"></script>
+	
+	<link rel='icon'  href='img/SLS.ico' />
+</head>
+<body>
+	<div id="box2">
+	<button id="return_index">←返回首页</button>
+	<p id="pp" style="color:white">知识点类型</p>
+		<div id="contain_btn">
+			<input id="s1" type="radio" name="content_type" value="表格">表格
+			<input id="s2" type="radio" name="content_type" value="内容">内容
+		</div>
+		<div id="table_row"><!--表格设置项-->
+		<pre>
+			行：<input id="t1" type="number" name="row" value="行" placeholder="最多20行">
+			列：<input id="t2" type="number" name="column" value="列" placeholder="最多20列">
+		</pre>
+			<p style="text-align:center;color:honeydew;font-weight:bold;background:rgba(102,105,106,0.8);">知识点标题:</p>
+			<input id="t3" type="text" name="tt" placeholder="请输入标题">
+			<button id="row_btn">确定</button>
+		</div>
+		<div id="string_box"><!--文本内容-->
+			<p style="text-align:center;color:white;font-weight:bold">知识点标题:</p>
+			<input id="t4" type="text" name="tt" placeholder="请输入标题">
+			<textarea name="text_str" style="min-height: 500px;min-width: 600px;max-height: 500px; max-width: 600px;font-size:21px"></textarea>
+		</div>
+		<div id="table_list"><!--表格阵列-->
+			<p style="color:white;text-align:center;font-weight:bold;background:rgba(102,105,106,0.8);"></p>
+		</div>
+		<div id="confirm_btn">
+			<button id="create_btn">创建</button>
+		</div>
+	</div>
+ <script src="sls.js" type="text/javascript"></script>
+</body>
+</html>
